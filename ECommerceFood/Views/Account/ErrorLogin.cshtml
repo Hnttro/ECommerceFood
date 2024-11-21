@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Error Login";
+    Layout = "_LayoutLogin";
+}
+
+<div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <h3 class="font-weight-bold mb-4">Có vẻ như bạn đã có tài khoản</h3>
+
+    <div class="text-center">
+        <p>Vui lòng đăng nhập bằng tài khoản hiện tại của bạn.</p>
+        <a href="@Url.Action("Login", "Account")" class="btn btn-primary">Đăng nhập</a>
+    </div>
+</div>

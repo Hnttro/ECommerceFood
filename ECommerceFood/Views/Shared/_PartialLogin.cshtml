@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Authorization
+
+<!-- CSS trực tiếp -->
+<style>
+    .profile-container {
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        margin-left: 0px;
+    }
+
+    .profile-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-name, .login-button {
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 14px; /* Tăng kích thước chữ cho dễ đọc */
+        color: #333; /* Màu chữ tối hơn */
+        transition: color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+    }
+
+        .profile-name:hover, .login-button:hover {
+            color: #007bff; /* Đổi màu khi hover */
+        }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #fff; /* Màu nền trắng */
+        min-width: 160px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        z-index: 1;
+        border-radius: 8px; /* Bo tròn góc */
+        overflow: hidden; /* Ẩn phần thừa ra ngoài */
+        transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt mà khi hiển thị */
+    }
+
+    .profile-dropdown:hover .dropdown-content {
+        display: block;
+        opacity: 1; /* Hiện lên */
+        transform: translateY(0); /* Đặt vị trí */
+    }
+
+    .dropdown-content a {
+        color: #333; /* Màu chữ tối */
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+    }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1; /* Màu nền khi hover */
+            border-left: 4px solid #007bff; /* Đường viền bên trái */
+        }
+
+
+    .login-button {
+        background: #fff;
+        color: #000000;
+        border: 2px solid #000000;
+        padding: 0.3rem 1rem;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10rem;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 7px;
+    }
+
+        .login-button:hover {
+            background: #e01313;
+            color: #fff;
+            border-color: #e01313;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+</style>
+
+<div class="profile-container">
+    <!-- Kiểm tra xem người dùng đã đăng nhập hay chưa -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="profile-dropdown">
+            <p class="profile-name">Hi, @User.Identity.Name!</p>
+            <div class="dropdown-content">
+                <a asp-controller="Account" asp-action="Profile">Hồ sơ cá nhân</a>
+                <a asp-action="Create" asp-controller="Contact">Liên hệ quảng cáo</a>
+                <a asp-controller="Account" asp-action="Logout">Log out</a>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <a href="~/Account/Login" class="login-button">
+            <i class="fas fa-user"></i>
+        </a>
+    }
+</div>
